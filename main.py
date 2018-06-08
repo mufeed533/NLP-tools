@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 from services.sentence_tokenizer import SentenceTokenizer
 from services.word_tokenizer import WordTokenizer
+from services.StopWords import StopWords
 
 app: Flask = Flask(__name__)
 
@@ -16,7 +17,7 @@ def sentence_tokenize():
 
 
 """
-Method to get input from user and split teh sentences into words
+Method to get input from user and split the sentences into words
 """
 @app.route("/wordTokenize", methods=['POST'])
 def word_tokenize():
@@ -25,6 +26,16 @@ def word_tokenize():
     tokenized_words = word_tokenizer_object.tokenizer()
     return render_template("WordTokenizer.html", words = tokenized_words)
 
+
+"""
+Method to get input from user and remove all the stop words from the string
+"""
+@app.route("/stopWordRemover", methods=['POST'])
+def stop_word_remover():
+    text = request.form.get('text')
+    stop_words_object = StopWords(text)
+    filtered_text = stop_words_object.StopWordRemove()
+    return render_template("StopWords.html", sentence = filtered_text)
 
 
 if __name__ == "__main__":
