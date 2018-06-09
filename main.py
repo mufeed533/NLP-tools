@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 from services.sentence_tokenizer import SentenceTokenizer
 from services.word_tokenizer import WordTokenizer
 from services.StopWords import StopWords
+from services.stemming import Stemming
 
 app: Flask = Flask(__name__)
 
@@ -37,6 +38,13 @@ def stop_word_remover():
     filtered_text = stop_words_object.StopWordRemove()
     return render_template("StopWords.html", sentence = filtered_text)
 
+
+@app.route("/stemmer", methods = ['POST'])
+def stemmer():
+    text = request.form.get('text')
+    stemming_object = Stemming(text)
+    stemmer_words = stemming_object.stemmer()
+    return render_template("stemmer.html", words = stemmer_words)
 
 if __name__ == "__main__":
     app.run(debug=True)
