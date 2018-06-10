@@ -1,0 +1,17 @@
+<!doctype html>
+<head>
+  <title>
+  Part of speech Tagging
+  </title>
+</head>
+<body>
+  <h2>The Part of speech tags from sample text are :</h2>
+  <ul>
+    {% for tags in all_tags %}
+      {% for tag in tags %}
+        <p>{{ tag }}</p>
+      {% endfor%}
+    {% endfor %}
+  <ul>
+</body>
+</html>
