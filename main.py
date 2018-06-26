@@ -5,6 +5,7 @@ from services.StopWords import StopWords
 from services.stemming import Stemming
 from services.partOfSpeechTagging import PartOfSpeechTagging
 from services.namedEntityRecognizer import NamedEntityRecognizer
+from services.lemmatizer import Lemmatizer
 
 app: Flask = Flask(__name__)
 
@@ -71,6 +72,15 @@ def named_entity_recognize():
     return render_template("namedEntityRecognizer.html", named_entities = named_entities)
 
 
+"""
+Controller for finding the useful route word for a word
+"""
+@app.route("/lemmatize", methods = ['POST'])
+def lemmatizer():
+    text =  request.form.get("text")
+    obj = Lemmatizer(text)
+    lemmatized_word = [text,obj.wordLemmatize()]
+    return render_template("lemmatizer.html", lemmatized_word = lemmatized_word)
 
 if __name__ == "__main__":
     app.run(debug=True)
