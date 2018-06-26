@@ -1,0 +1,30 @@
+<!doctype html>
+<head>
+  <title>
+  Word details using wordNet
+  </title>
+</head>
+<body>
+  <h2>The details of the word <span style = "color:green"> {{ details[0] }} :</span> </h2>
+  <p>definition: {{ details[1] }}</p>
+  <p>Synonyms : </p>
+      {% for synonyms in details[2] %}
+        {{ synonyms }},
+      {% endfor %}
+  <p>Synonyms : </p>
+      {% for antonyms in details[3] %}
+          {{ antonyms }},
+        {% endfor %}
+  <p>Examples : </p>
+      {% for examples in details[4] %}
+        {{ examples }},
+      {% endfor %}
+  <ul>
+    {% for tags in all_tags %}
+      {% for tag in tags %}
+        <p>{{ tag }}</p>
+      {% endfor%}
+    {% endfor %}
+  <ul>
+</body>
+</html>

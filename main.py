@@ -6,6 +6,7 @@ from services.stemming import Stemming
 from services.partOfSpeechTagging import PartOfSpeechTagging
 from services.namedEntityRecognizer import NamedEntityRecognizer
 from services.lemmatizer import Lemmatizer
+from services.wordNet import WordDetails
 
 app: Flask = Flask(__name__)
 
@@ -81,6 +82,23 @@ def lemmatizer():
     obj = Lemmatizer(text)
     lemmatized_word = [text,obj.wordLemmatize()]
     return render_template("lemmatizer.html", lemmatized_word = lemmatized_word)
+
+
+"""
+Controller to get details of the word such as definition, synonyms, antonyms and examples
+"""
+@app.route("/details", methods = ['POST'])
+def wordDetails():
+    text =  request.form.get("text")
+    obj = WordDetails(text)
+    details = []
+    details.append(text)
+    details.append(obj.definition())
+    details.append(obj.synonyms())
+    details.append(obj.antonyms())
+    details.append(obj.examples())
+    print(details)
+    return render_template("wordDetails.html",details = details)
 
 if __name__ == "__main__":
     app.run(debug=True)
