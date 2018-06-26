@@ -4,6 +4,7 @@ from services.word_tokenizer import WordTokenizer
 from services.StopWords import StopWords
 from services.stemming import Stemming
 from services.partOfSpeechTagging import PartOfSpeechTagging
+from services.namedEntityRecognizer import NamedEntityRecognizer
 
 app: Flask = Flask(__name__)
 
@@ -58,6 +59,17 @@ def pos_tagging():
     pos_object = PartOfSpeechTagging()
     all_tags = pos_object.partOfSpeechTagging()
     return render_template("partOfSpeechtagging.html" , all_tags = all_tags)
+
+
+"""
+Controller for identifying named entities from sample text
+"""
+@app.route("/namedEntityRecognizer", methods = ['GET'])
+def named_entity_recognize():
+    named_enitoty_recognizer_object = NamedEntityRecognizer()
+    named_entities = named_enitoty_recognizer_object.namedEntityRecognizer()
+    return render_template("namedEntityRecognizer.html", named_entities = named_entities)
+
 
 
 if __name__ == "__main__":

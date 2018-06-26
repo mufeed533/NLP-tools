@@ -1,0 +1,15 @@
+<!doctype html>
+<head>
+  <title>
+  Part of speech Tagging
+  </title>
+</head>
+<body>
+  <h2>The identified entities from sample text are :</h2>
+  <ul>
+    {% for entities in named_entities %}
+      <p>{{ entities }}</p>
+    {% endfor %}
+  <ul>
+</body>
+</html>
