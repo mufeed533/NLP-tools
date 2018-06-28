@@ -1,3 +1,6 @@
+"""
+A sentiment analysis tool written using the functionalities of NLTK and sklearn. The algorithm trains itself with a large movie_reviews dataset. The dataset is available with NLTK corpus.Then it tries to classify the new movie_review either positive or negative.
+"""
 import nltk
 import random
 from nltk.corpus import movie_reviews
