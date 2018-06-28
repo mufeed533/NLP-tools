@@ -7,6 +7,7 @@ from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.svm import SVC, LinearSVC, NuSVC
 import pickle
 
+
 documents = []
 # there are two categories in the movie_reviews data. Negative and Positive
 for categories in movie_reviews.categories():
@@ -36,6 +37,7 @@ featuresets = [(find_features(rev), category)for (rev, category) in documents]
 training_set = featuresets[:1900]
 test_set = featuresets[1900:]
 
+# example to train and save the model. I commented it because I already saved the model to save time of retraining
 # classifier = nltk.NaiveBayesClassifier.train(training_set)
 # save_classifier = open("NaiveBayes.pickle","wb")
 # pickle.dump(classifier, save_classifier)
@@ -43,15 +45,16 @@ test_set = featuresets[1900:]
 
 
 # original NLTK Naive Bayes classifier
-saved_classifier = open("NaiveBayes.pickle","rb")
+saved_classifier = open("saved_classifiers/NaiveBayes.pickle","rb")
 classifier = pickle.load(saved_classifier)
 saved_classifier.close()
-classifier.show_most_informative_features(30)
+classifier.show_most_informative_features(15)
 print("Origianal naive NaiveBayes accuracy percent : ",(nltk.classify.accuracy(classifier, test_set))*100)
 
 # MNBclassifier
-MNB_classifier = SklearnClassifier(MultinomialNB())
-MNB_classifier.train(training_set)
+saved_classifier = open("saved_classifiers/MNB.pickle","rb")
+MNB_classifier = pickle.load(saved_classifier)
+saved_classifier.close()
 print("MNBclassifier accuracy percent : ",(nltk.classify.accuracy(MNB_classifier, test_set))*100)
 
 # GaussianNB classifier
@@ -60,33 +63,39 @@ print("MNBclassifier accuracy percent : ",(nltk.classify.accuracy(MNB_classifier
 # print("GaussianNB_classifier accuracy percent : ",(nltk.classify.accuracy(GaussianNB_classifier, test_set))*100)
 
 # BernoulliNB classifier
-BernoulliNB_classifier = SklearnClassifier(BernoulliNB())
-BernoulliNB_classifier.train(training_set)
+saved_classifier = open("saved_classifiers/BernoulliNB.pickle","rb")
+BernoulliNB_classifier = pickle.load(saved_classifier)
+saved_classifier.close()
 print("BernoulliNB_classifier accuracy percent : ",(nltk.classify.accuracy(BernoulliNB_classifier, test_set))*100)
 
 # LogisticRegression classifier
-LogisticRegression_classifier = SklearnClassifier(LogisticRegression())
-LogisticRegression_classifier.train(training_set)
+saved_classifier = open("saved_classifiers/logisiticRegression.pickle","rb")
+LogisticRegression_classifier = pickle.load(saved_classifier)
+saved_classifier.close()
 print("LogisticRegression_classifier accuracy percent : ",(nltk.classify.accuracy(LogisticRegression_classifier, test_set))*100)
 
 
 # SGDClassifier classifier
-SGDClassifier_classifier = SklearnClassifier(SGDClassifier())
-SGDClassifier_classifier.train(training_set)
+saved_classifier = open("saved_classifiers/SGDClassifier.pickle","rb")
+SGDClassifier_classifier = pickle.load(saved_classifier)
+saved_classifier.close()
 print("SGDClassifier_classifier accuracy percent : ",(nltk.classify.accuracy(SGDClassifier_classifier, test_set))*100)
 
 # SVC classifier
-SVC_classifier = SklearnClassifier(SVC())
-SVC_classifier.train(training_set)
+saved_classifier = open("saved_classifiers/SVC_classifier.pickle","rb")
+SVC_classifier = pickle.load(saved_classifier)
+saved_classifier.close()
 print("SVC_classifier accuracy percent : ",(nltk.classify.accuracy(SVC_classifier, test_set))*100)
 
 # LinearSVC classifier
-LinearSVC_classifier = SklearnClassifier(LinearSVC())
-LinearSVC_classifier.train(training_set)
+saved_classifier = open("saved_classifiers/LinearSVC_classifier.pickle","rb")
+LinearSVC_classifier = pickle.load(saved_classifier)
+saved_classifier.close()
 print("LinearSVC_classifier accuracy percent : ",(nltk.classify.accuracy(LinearSVC_classifier, test_set))*100)
 
 
 # NuSVC classifier
-NuSVC_classifier = SklearnClassifier(NuSVC())
-NuSVC_classifier.train(training_set)
+saved_classifier = open("saved_classifiers/NuSVC_classifier.pickle","rb")
+NuSVC_classifier = pickle.load(saved_classifier)
+saved_classifier.close()
 print("NuSVC_classifier accuracy percent : ",(nltk.classify.accuracy(NuSVC_classifier, test_set))*100)
